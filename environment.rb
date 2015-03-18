@@ -1,6 +1,7 @@
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../Gemfile', __FILE__)
 
 require 'sinatra'
+require 'active_record'
 
 require 'bundler/setup'
 require 'rubygems'
