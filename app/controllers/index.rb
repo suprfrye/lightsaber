@@ -5,7 +5,8 @@ get '/' do
 end
 
 get '/sealions' do
-  erb :index, locals: {lions: SeaLion.all}
+  lions = SeaLion.pluck(:name)
+  "Let's welcome our new cubs: #{lions.join(', ')}!"
 end
 
 post '/sealions' do
@@ -13,13 +14,16 @@ post '/sealions' do
 end
 
 get '/sealions/:id' do
-  erb :show, locals: {lion: SeaLion.find(params[:id])}
+  lion = SeaLion.find(params[:id])
+  "Hi, I'm #{lion.name}.\nYou can find me in #{lion.location}.\nMy favorite food is #{lion.favorite_food}."
 end
 
 put '/sealions/:id' do
-  redirect '/sealions/:id'
+  redirect '/sealions'
 end
 
 delete '/sealions/:id' do
+  lion = SeaLion.find(params[:id])
+  lion.destroy
   redirect '/sealions'
 end
