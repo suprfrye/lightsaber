@@ -2,3 +2,6 @@
 <p>Hi, I'm <%= @lion.name %>.</p>
 <p>You can find me in <%= @lion.location %>.</p>
 <p>My favorite food is <%= @lion.favorite_food %>.</p>
+<form action="/sealions/<%= @lion.id %>/edit" method="get">
+  <input type="submit" value="Update"/>
+</form>
