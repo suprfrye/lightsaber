@@ -14,7 +14,7 @@ post '/sealions' do
 end
 
 get '/sealions/:id' do
-  lion = SeaLion.find(params[:id])
+  lion = SeaLion.find_by(id: params[:id])
   "Hi, I'm #{lion.name}.\nYou can find me in #{lion.location}.\nMy favorite food is #{lion.favorite_food}."
 end
 
@@ -23,7 +23,7 @@ put '/sealions/:id' do
 end
 
 delete '/sealions/:id' do
-  lion = SeaLion.find(params[:id])
+  lion = SeaLion.find_by(id: params[:id])
   lion.destroy
   redirect '/sealions'
 end
