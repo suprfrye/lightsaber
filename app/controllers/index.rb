@@ -1,12 +1,12 @@
 require 'sinatra'
 
 get '/' do
-  "Welcome to the Sea Lions Den."
+  redirect '/sealions'
 end
 
 get '/sealions' do
-  sea_lions = ['Greg', 'Tiffany', 'Rosetta', 'Tommy']
-  "Let's welcome the new cubs: #{sea_lions.join(", ")}!"
+  lions = SeaLion.pluck(:name)
+  "Let's welcome our new cubs: #{lions.join(', ')}!"
 end
 
 post '/sealions' do
@@ -14,13 +14,16 @@ post '/sealions' do
 end
 
 get '/sealions/:id' do
-  "Tommy was born on Pier 39. He is the younger brother of Tiffany and Rosetta"
+  lion = SeaLion.find_by(id: params[:id])
+  "Hi, I'm #{lion.name}.\nYou can find me in #{lion.location}.\nMy favorite food is #{lion.favorite_food}."
 end
 
 put '/sealions/:id' do
-  redirect '/sealions/:id'
+  redirect '/sealions'
 end
 
 delete '/sealions/:id' do
-  redirect '/sealions/:id'
+  lion = SeaLion.find_by(id: params[:id])
+  lion.destroy
+  redirect '/sealions'
 end
