@@ -5,8 +5,8 @@ get '/' do
 end
 
 get '/sealions' do
-  lions = SeaLion.pluck(:name)
-  "Let's welcome our new cubs: #{lions.join(', ')}!"
+  @lions = SeaLion.all
+  erb :index
 end
 
 post '/sealions' do
@@ -14,8 +14,8 @@ post '/sealions' do
 end
 
 get '/sealions/:id' do
-  lion = SeaLion.find_by(id: params[:id])
-  "Hi, I'm #{lion.name}.\nYou can find me in #{lion.location}.\nMy favorite food is #{lion.favorite_food}."
+  @lion = SeaLion.find_by(id: params[:id])
+  erb :show
 end
 
 put '/sealions/:id' do
