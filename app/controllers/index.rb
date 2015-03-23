@@ -5,21 +5,28 @@ get '/' do
 end
 
 get '/sealions' do
-  lions = SeaLion.pluck(:name)
-  "Let's welcome our new cubs: #{lions.join(', ')}!"
+  @lions = SeaLion.all
+  erb :index
+end
+
+get '/sealions/new' do
+  erb :new
 end
 
 post '/sealions' do
-  redirect '/sealions'
+  @new_lion = SeaLion.new(name: params[:name],
+                          location: params[:location],
+                          favorite_food: params[:favorite_food])
+  if @new_lion.save
+    redirect "/sealions/#{@new_lion.id}"
+  else
+    [404, "Could not add cub."]
+  end
 end
 
 get '/sealions/:id' do
-  lion = SeaLion.find_by(id: params[:id])
-  "Hi, I'm #{lion.name}.\nYou can find me in #{lion.location}.\nMy favorite food is #{lion.favorite_food}."
-end
-
-put '/sealions/:id' do
-  redirect '/sealions'
+  @lion = SeaLion.find_by(id: params[:id])
+  erb :show
 end
 
 delete '/sealions/:id' do
@@ -27,3 +34,18 @@ delete '/sealions/:id' do
   lion.destroy
   redirect '/sealions'
 end
+
+get '/sealions/:id/edit' do
+  @lion = SeaLion.find(params[:id])
+  erb :update
+end
+
+put '/sealions/:id/edit' do
+  @lion = SeaLion.find(params[:id])
+  @lion.update_attributes(name: params[:name],
+                          location: params[:location],
+                          favorite_food: params[:favorite_food])
+  redirect "/sealions/#{@lion.id}"
+end
+
+
