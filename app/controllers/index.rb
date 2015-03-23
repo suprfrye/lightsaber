@@ -9,8 +9,19 @@ get '/sealions' do
   erb :index
 end
 
+get '/sealions/new' do
+  erb :new
+end
+
 post '/sealions' do
-  redirect '/sealions'
+  @new_lion = SeaLion.new(name: params[:name],
+                          location: params[:location],
+                          favorite_food: params[:favorite_food])
+  if @new_lion.save
+    redirect "/sealions/#{@new_lion.id}"
+  else
+    [404, "Could not add cub."]
+  end
 end
 
 get '/sealions/:id' do
@@ -32,8 +43,8 @@ end
 put '/sealions/:id/edit' do
   @lion = SeaLion.find(params[:id])
   @lion.update_attributes(name: params[:name],
-                         location: params[:location],
-                         favorite_food: params[:favorite_food])
+                          location: params[:location],
+                          favorite_food: params[:favorite_food])
   redirect "/sealions/#{@lion.id}"
 end
 
