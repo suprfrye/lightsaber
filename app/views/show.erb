@@ -5,3 +5,7 @@
 <form action="/sealions/<%= @lion.id %>/edit" method="get">
   <input type="submit" value="Update"/>
 </form>
+<form action="/sealions/<%= @lion.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete"/>
+</form>
