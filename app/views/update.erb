@@ -1,0 +1,7 @@
+<form action="/sealions/<%= @lion.id %>/edit" method="post">
+  <input type="hidden" name="_method" value="put"/><br>
+  <input type="text" value="<%= @lion.name %>" name="name"/><br>
+  <input type="text" value="<%= @lion.location %>" name="location"/><br>
+  <input type="text" value="<%= @lion.favorite_food %>" name="favorite_food"/><br><br>
+  <input type="submit" value="Update">
+</form>

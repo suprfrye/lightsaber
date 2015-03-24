@@ -1,0 +1,10 @@
+
+<p>Let's welcome our new cubs!</p>
+<ul>
+  <% @lions.each do |lion| %>
+  <li><a href="/sealions/<%= lion.id %>"><%= lion.name %></a></li>
+  <% end %>
+</ul>
+<form action="/sealions/new" method="get">
+  <input type="submit" value="Add Cub"/>
+</form>

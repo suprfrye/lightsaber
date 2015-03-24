@@ -9,9 +9,16 @@ require 'rubygems'
 require 'uri'
 require 'pathname'
 
+require 'erb'
+
 
 APP_ROOT = Pathname.new(File.expand_path('../', __FILE__))
 APP_NAME = APP_ROOT.basename.to_s
+
+configure do
+  set :root, APP_ROOT.to_path
+  set :views, File.join(APP_ROOT,"app","views")
+end
 
 #Load Models
 Dir[APP_ROOT.join('app', 'models', '*.rb')].each { |file| require file }
