@@ -2,6 +2,9 @@ require ::File.expand_path('../environment', __FILE__)
 
 require 'rake'
 require 'active_record'
+require 'jasmine'
+
+load 'jasmine/tasks/jasmine.rake'
 
 desc 'Start IRB with application environment loaded'
 task "console" do
@@ -74,5 +77,11 @@ namespace :db do
     task :prepare do
       system "rake db:migrate RACK_ENV=test"
     end
+  end
+end
+
+namespace :test do
+  task :jasmine do
+    abort 'No Jasmine run (sudo) gem install jasmine'
   end
 end

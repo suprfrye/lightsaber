@@ -5,6 +5,7 @@ get '/' do
 end
 
 get '/sealions' do
+  # @title = "Sea Lions Den"
   @lions = SeaLion.all
   erb :index
 end
