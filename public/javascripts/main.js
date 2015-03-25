@@ -18,22 +18,24 @@ var errorModule = {
     el.style.visibility="visible";
   },
   hide: function(el) {
-    el.style.visibility="visible";
+    el.style.visibility="hidden";
   },
   change: function() {
 
   }
-
-
 };
 
 var showHide = function() {
   var el = document.getElementById("error");
 
-  if(el.style.visibility === 'visible') {
+  if (el.style.visibility == 'visible') {
     errorModule.hide(el);
   } else {
     errorModule.show(el);
   }
-}
+};
+
+var elAlert = document.getElementById("alert");
+elAlert.addEventListener('click', showHide, false);
+// elAlert.dispatchEvent(showHide);
 
